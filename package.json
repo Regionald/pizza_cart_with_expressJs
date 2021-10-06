@@ -1,9 +1,10 @@
 {
-  "name": "pizza_cart_with_expressJs",
+  "name": "pizza_cart_with_expressjs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,8 +13,5 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.13"
   }
 }
