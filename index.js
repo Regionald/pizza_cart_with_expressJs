@@ -17,13 +17,13 @@ app.set('view engine', 'handlebars');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static('public'));
-let PORT = process.env.PORT || 8081;
+let PORT = process.env.PORT||8081;
 
 app.get('/', (req, res) => {
     res.render('index');
 })
 
 
-app.listen(PORT, 'localhost', () => {
+app.listen(PORT,'localhost', () => {
     console.log("The server is listening at port:" + PORT);
 })
