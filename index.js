@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars');
 const cart = require('./factory.js');
 const carter = cart();
 const app = express();
-const PORT = process.env.PORT||8081;
+const PORT = process.env.PORT||3039;
 const handlebarSetup = exphbs({
     partialsDir: "./views/partials",
     viewPath: './views',
@@ -25,6 +25,6 @@ app.get('/', (req, res) => {
 })
 
 
-app.listen(PORT,'localhost', () => {
+app.listen(PORT,() => {
     console.log("The server is listening at port:" + PORT);
 })
