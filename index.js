@@ -21,7 +21,65 @@ app.use(express.static('public'));
 
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index',{ 
+        mediumQty: carter.mediumValue(),
+        smallQty: carter.smallValue(),
+        largeQty: carter.largeValue(),
+        smallTotal: smallTotal.toFixed(2),
+        mediumTotal: mediumTotal.toFixed(2),
+        largeTotal: largeTotal.toFixed(2),
+        total: carter.totalPrice().toFixed(2),
+        unhide: carter.unhide(),
+        uncart: carter.hide(),
+        message:carter.mes()
+    });
+})
+app.get('/Sadd', (req, res) => {
+    carter.qtyIncrement('small');
+    res.redirect('/');
+})
+app.get('/Ssub', (req, res) => {
+    carter.qtydecrement('small');
+    res.redirect('/');
+})
+
+app.get('/Madd', (req, res) => {
+    carter.qtyIncrement('medium');
+    res.redirect('/');
+})
+app.get('/Msub', (req, res) => {
+    carter.qtydecrement('medium');
+    res.redirect('/');
+})
+app.get('/Ladd', (req, res) => {
+    carter.qtyIncrement('large');
+    res.redirect('/');
+})
+app.get('/Lsub', (req, res) => {
+    carter.qtydecrement('large');
+    res.redirect('/');
+})
+
+app.get('/small', (req, res) => {
+    carter.cartOpener();
+    carter.qtyIncrement('small');
+    res.redirect('/');
+})
+app.get('/medium', (req, res) => {
+    carter.cartOpener();
+    carter.qtyIncrement('medium');
+    res.redirect('/');
+})
+app.get('/large', (req, res) => {
+    carter.cartOpener();
+    carter.qtyIncrement('large');
+    res.redirect('/');
+})
+app.post('/amount', (req, res) => {
+    carter.respond(req.body.amount);
+    console.log(req.body.amount);
+    res.redirect('/');
+
 })
 
 
