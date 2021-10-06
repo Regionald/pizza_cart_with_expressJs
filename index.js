@@ -21,6 +21,9 @@ app.use(express.static('public'));
 
 
 app.get('/', (req, res) => {
+    var smallTotal = carter.smallValue() * 22.99;
+    var mediumTotal = carter.mediumValue() * 60.50;
+    var largeTotal = carter.largeValue() * 120.75;
     res.render('index',{ 
         mediumQty: carter.mediumValue(),
         smallQty: carter.smallValue(),
