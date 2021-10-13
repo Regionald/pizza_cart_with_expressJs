@@ -1,10 +1,20 @@
-module.exports = function cart() {
-    var smallqty = 0;
-    var mediumqty = 0;
-    var largeqty = 0;
+module.exports = function Cart(para) {
+    var smallqty = para||0;
+    var mediumqty = para||0;
+    var largeqty = para||0;
     var openCart = 0;
-    var messages="";
+    var messages = "";
+    function increase(){
+        counter++;
+    }
+    function decrease(){
+        counter--;
+    }
+    function value(){
+        return counter
+    }
     function qtyIncrement(choice) {
+
         if (choice == 'small') {
             smallqty++;
         }
@@ -52,35 +62,37 @@ module.exports = function cart() {
     function largeValue() {
         return largeqty;
     }
-    function cartValue(){
+    function cartValue() {
         return openCart;
     }
     function totalPrice() {
-        var num = smallValue() * 22.99 + mediumValue() * 60.50 + largeValue() * 120.75;
+        var num = smallValue() * 22.50 + mediumValue() * 60.50 + largeValue() * 120.50;
         return num;
 
     }
-    function respond(amount){
-     if (amount==totalPrice()){
-         
-         messages='Enjoy" your pizzas';
-           
-     }
-     else if(amount>totalPrice()){
-        messages=`Enjoy" your pizzas, your change is:R${(amount-totalPrice()).toFixed(2)}`;
-     }
-     else if(amount<totalPrice()){
-      messages="Sorry - that is not enough money!";
-     }
-     else {messages="please enter correct values";}
+    function respond(amount) {
+        if (amount == totalPrice()) {
+
+            messages = 'Enjoy" your pizzas';
+
+        }
+        else if (amount > totalPrice()) {
+            messages = `Enjoy" your pizzas, your change is:R${(amount - totalPrice()).toFixed(2)}`;
+        }
+        else if (amount < totalPrice()) {
+            messages = "Sorry - that is not enough money!";
+        }
+        else { messages = "please enter correct values"; }
     }
-    function mes(){
-        return messages; 
-        setTimeout(()=>{smallqty=0;
-            mediumqty=0;
-            largeqty=0},4000)
+    function mes() {
+        return messages;
+        setTimeout(() => {
+            smallqty = 0;
+            mediumqty = 0;
+            largeqty = 0
+        }, 4000)
     }
-    setTimeout(mes,3000);
+    setTimeout(mes, 3000);
 
     return {
         qtyIncrement,
@@ -94,7 +106,9 @@ module.exports = function cart() {
         cartOpener,
         cartValue,
         respond,
-        mes
+        mes,increase,
+        decrease,
+        value
     }
 }
 

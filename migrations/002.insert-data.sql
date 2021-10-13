@@ -1,0 +1,1 @@
+INSERT INTO ORDERS (userName,smallQty,mediumQty,largeQty,total)  VALUES ('Regi',1,2,3,4);

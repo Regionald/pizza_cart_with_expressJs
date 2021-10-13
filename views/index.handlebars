@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>perfect pizza</title>
-    <link rel="stylesheet" href="simple-grid.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-
 <body>
     <div class="container headcenter">
         <div class="row">
@@ -18,9 +6,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
-                {{#if uncart}}
-                <h2>Shopping Cart</h2>
+            <div class="col-12 {{show}}">
+    
+                <h2>Shopping Cart </h2>
                 <table class="center">
                     <tr>
                         <th></th>
@@ -31,41 +19,43 @@
                     </tr>
                     <tr>
                         <td>Small</td>
+                        <form action="/small" method="post">
                         <td>
-                            <a href="Sadd">
-                                <button class="smallAddbtn">+</button></a>
+                            <input type="submit" name="small" value="+">
+                            
                         </td>
                         <td>
-                            <a href="Ssub">
-                                <button class="smallSubbtn">-</button></a>
+                                <input type="submit" name="small" value="-">
+                                
                         </td>
+                        </form>
                         <td class="smallQty">{{smallQty}}</td>
                         <td class="smallTotal">R{{smallTotal}}</td>
 
                     </tr>
                     <tr>
                         <td>Medium</td>
+                        <form action="/medium" method="post">
                         <td>
-                            <a href="Madd">
-                                <button class="mediumAddbtn">+</button></a>
+                            <input type="submit" name="medium" value="+">
                         </td>
                         <td>
-                            <a href="Msub">
-                                <button class="mediumSubbtn">-</button></a>
+                            <input type="submit" name="medium" value="-">
                         </td>
+                        </form>
                         <td class="mediumQty">{{mediumQty}}</td>
                         <td class="mediumTotal">R{{mediumTotal}}</td>
                     </tr>
                     <tr>
                         <td>Large</td>
+                        <form action="/large" method="post" >
                         <td>
-                            <a href="Ladd">
-                                <button class="largeAddbtn">+</button></a>
+                           <input type="submit" name="large" value="+"> 
                         </td>
                         <td>
-                            <a href="Lsub">
-                                <button class="largeSubbtn">-</button></a>
+                            <input type="submit" name="large" value="-">
                         </td>
+                        </form>
                         <td class="largeQty">{{largeQty}}</td>
                         <td class="largeTotal">R{{largeTotal}}</td>
 
@@ -78,37 +68,31 @@
                         <td class="total">R{{total}}</td>
                     </tr>
                 </table>
-                {{#if unhide}}
+                
                 <div class="message">{{message}}
                 </div>
-                <form action="amount" method="POST">
-                    <div><label class="labeler" for="mes">Amount</label>
-                        <input type="number" step="0.01" name="amount" class="cash" placeholder="Amount e.g R50.55"
-                            id="mes" required>
+                
+                <div>
+                    <a href="order">
+                    <button  type="submit" class="paymBtn">order</button></a>
                     </div>
-                    <br>
-                    <div><button type="submit" class="paymBtn">---Pay---</button></div>
-                </form>
-                {{else}}
-                <h6>please at least add 1 item in a cart</h6>
-                {{/if}}
-                {{else}}
-                {{/if}}
-
+                   
             </div>
         </div>
         <div class="row">
             <div class="col-4 small">
                 <h2>Small Pizza</h2>
                 <img src="small.jpg" alt="pizza" width="93%" height="auto">
-                <h3>R22.99</h3>
+                <h3>R22.50</h3>
                 <div class="content">
                     small pizza with 3 toppings
                     1 meet topping
                     3 or less other topping
                     <div>mmmmmmmmhhh Nice!!!!!!</div>
                     <div>
-                        <a href="small" target="_self"><button class="sButbtn">---Buy---</button></i></a>
+                        <form action="/small" method="post">
+                        <input type="submit" name="small" value="Buy">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -121,7 +105,9 @@
                     medium margeritha pizza with 3 toppings max 2 or less meat topping. 3 or less other
                     toppings.
                     <div>
-                        <a href="medium" target="_self"><button class="mButbtn">---Buy---</button></i></a>
+                        <form action="/medium" method="post">
+                        <input type="submit" name="medium" value="Buy">
+                        </form>
                     </div>
                 </div>
 
@@ -129,11 +115,13 @@
             <div class="col-4 large">
                 <h2>Large Pizza</h2>
                 <img src="large.jpg" alt="pizza" width="93%" height="auto">
-                <h3>R120.75</h3>
+                <h3>R120.50</h3>
                 <div class="content">
                     large margeritha pizza with 3 toppings max. 3 meat toppings max. 3 or less other topping.
                     <div>
-                        <a href="large" target="_self"><button class="lButbtn">---Buy---</button></i></a>
+                        <form action="/large" method="post">
+                        <input type="submit" name="large" value="Buy">
+                        </form>
                     </div>
                 </div>
 
