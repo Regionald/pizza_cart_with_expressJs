@@ -23,11 +23,11 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { maxAge: 60000 } }));
 
-// open({
-//     filename: './orders.db',
-//     driver:sqlite3.Database
-// })
-//     .then(
+open({
+    filename: './orders.db',
+    driver:sqlite3.Database
+})
+    .then(
 //         async function (db) {
 
 //             await db.migrate();
@@ -219,20 +219,9 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true,
 
 //         }
 
-//     )
-    // .catch(err => console.log(err));
-    open({
-        filename: './orders.db',
-        driver: sqlite3.Database
-    }).then(async function (db) {
+  )
+.catch(err => console.log(err));
     
-        // run migrations
-    
-        await db.migrate();
-    
-        // only setup the routes once the database connection has been established
-    
-    })
  app.listen(PORT, () => {
         console.log("The server is listening at port:" + PORT);
 })
