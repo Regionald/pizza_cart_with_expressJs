@@ -7,8 +7,7 @@ const session = require('express-session');
 const sqlite3 = require('sqlite3');
 const { open } = require('sqlite');
 
-const PORT = process.env.PORT || 3039;
-
+const PORT = process.env.PORT || 3040;
 
 const handlebarSetup = exphbs({
     partialsDir: "./views/partials",
@@ -42,13 +41,14 @@ open({
 
                 if (!req.session.email) {
                     res.redirect('/login');
-                }
+                    return;
+                };
 
                 var show = 'hidden';
 
                 if (req.session.total > 0) {
-                    var show = '';
-                }
+                    var show = 'a';
+                };
 
                 var smallTotal = (req.session.smallValue ? req.session.smallValue : 0) * 22.50;
                 var mediumTotal = (req.session.mediumValue ? req.session.mediumValue : 0) * 60.50;
@@ -166,47 +166,57 @@ open({
                 if (!req.session.email) {
                     res.redirect('/login');
                 }
-                const orders = 'SELECT * from ORDERS where userName=?'
-                const order = await db.all(orders, req.session.email);
 
-                
+                const orders = 'SELECT * from ORDERS where userName=? AND status=?'
+                const order = await db.all(orders, req.session.email,'payment due');
 
-                for (var i=0;i<order.length;i++){
-                       const checkStatus=order[i];
-                       if(checkStatus.status=='paid'){
-                          order.newStyle='hidden';
-                       };
+                const paids = 'SELECT * from ORDERS where userName=? AND status=?'
+                const paid = await db.all(paids, req.session.email,'paid');
 
-                }
+                const collects = 'SELECT * from ORDERS where userName=? AND status=?'
+                const collect = await db.all(collects, req.session.email,'collected');
                 
                 
-                res.render('order', { orders: order })
+                res.render('order', { orders: order,paid:paid,collect:collect })
 
             })
             app.post('/pay/:id', async (req, res) => {
 
                
-                var show="";
                 req.session.amount = req.body.amount;
                 if (req.session.amount==req.session.total){
                     const idno = req.params.id;
+                    console.log(idno);
                     const update = 'UPDATE ORDERS set status=? where id=?'
-                    const updater = await db.all(update, 'paid', idno);
+                    await db.all(update, 'paid', idno);
                     res.redirect('/cart');
                 }
                 else if(req.session.amount>req.session.total){
                     const idno = req.params.id;
                     const update = 'UPDATE ORDERS set status=? where id=?'
-                    const updater = await db.all(update, 'paid', idno);
+                    await db.all(update, 'paid', idno);
                     res.redirect('/cart');
                 }
                 else{
                     res.redirect('/cart');
                 }
-                
-
-                
+     
             })
+            app.post('/collect/:id', async (req, res) => {
+
+                    const idno = req.params.id;
+                    const update = 'UPDATE ORDERS set status=? where id=?'
+                    const updater = await db.all(update, 'collected', idno);
+                    res.redirect('/cart');
+            })
+            app.post('/remove/:id', async (req, res) => {
+
+                const idno = req.params.id;
+                const delet = 'DELETE from ORDERS where id=?'
+                const deleted = await db.run(delet,idno);
+                res.redirect('/cart');
+                
+           })
 
             app.listen(PORT, () => {
                 console.log("The server is listening at port:" + PORT);
