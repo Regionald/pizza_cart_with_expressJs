@@ -79,7 +79,7 @@ open({
                 }
                 if (req.body.small == '-') {
                     order.qtydecrement('small');
-                }
+                };
 
                 req.session.smallValue = order.smallValue();
                 req.session.total = order.totalPrice().toFixed(2);
@@ -103,7 +103,7 @@ open({
                 }
                 if (req.body.medium == '-') {
                     order.qtydecrement('medium');
-                }
+                };
 
                 req.session.mediumValue = order.mediumValue();
                 req.session.total = order.totalPrice().toFixed(2);
@@ -127,7 +127,7 @@ open({
                 }
                 if (req.body.large == '-') {
                     order.qtydecrement('large');
-                }
+                };
 
 
                 req.session.total = order.totalPrice().toFixed(2);
@@ -149,7 +149,7 @@ open({
                 }
                 else {
                     res.redirect('/login');
-                }
+                };
 
 
             })
@@ -199,7 +199,7 @@ open({
                 }
                 else{
                     res.redirect('/cart');
-                }
+                };
      
             })
             app.post('/collect/:id', async (req, res) => {
@@ -225,7 +225,7 @@ open({
         }
 
     )
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
 
 
 
