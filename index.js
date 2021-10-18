@@ -215,14 +215,15 @@ open({
                 
         // //    })
 
-            app.listen(PORT, () => {
-                console.log("The server is listening at port:" + PORT);
-            })
+            
 
         }
 
     )
     .catch(err => console.log(err));
+    app.listen(PORT, () => {
+        console.log("The server is listening at port:" + PORT);
+    })
 
 
 
