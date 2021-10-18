@@ -206,7 +206,7 @@ open({
 
                     const idno = req.params.id;
                     const update = 'UPDATE ORDERS set status=? where id=?'
-                    const updater = await db.all(update, 'collected', idno);
+                    await db.all(update, 'collected', idno);
                     res.redirect('/cart');
             })
             app.post('/remove/:id', async (req, res) => {
